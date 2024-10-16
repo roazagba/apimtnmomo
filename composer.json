@@ -31,8 +31,11 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Roazagba\\ApiMTNMomo\\MTNMoMoServiceProvider"
+                "Roazagba\\ApiMTNMomo\\Providers\\MTNMoMoServiceProvider"
             ]
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
     }
 }

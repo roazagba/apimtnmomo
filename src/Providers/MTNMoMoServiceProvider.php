@@ -1,6 +1,6 @@
 <?php
 
-namespace Roazagba\ApiMTNMomo;
+namespace Roazagba\ApiMTNMomo\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Roazagba\ApiMTNMomo\Console\CreateApiUserCommand;
@@ -15,7 +15,7 @@ class MTNMoMoServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/mtnmomo.php' => config_path('mtnmomo.php'),
+            __DIR__ . '/../../config/mtnmomo.php' => config_path('mtnmomo.php'),
         ], 'config');
 
         if ($this->app->runningInConsole()) {
@@ -33,7 +33,7 @@ class MTNMoMoServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/mtnmomo.php',
+            __DIR__ . '/../../config/mtnmomo.php',
             'mtnmomo'
         );
     }
