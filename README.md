@@ -1,6 +1,6 @@
 # MTN MoMo API (Collection, Disbursement, Remittance) pour Laravel
 
-### _Info: Ce package vous permet d'intégrer directement l'API MTN MoMo pour Laravel sans utiliser un quelconque agrégateur de paiement et d'avoir le contrôle sur vos transactions_
+### Info: Ce package vous permet d'intégrer directement l'API MTN MoMo pour Laravel sans utiliser un quelconque agrégateur de paiement et d'avoir le contrôle sur vos transactions
 
 ### NB: Mode Sandbox utilisé. Pour passer en mode production veuillez me contactez à [ana@roazagba.me](mailto:ana@roazagba.me)
 
@@ -149,8 +149,8 @@ $user_info = $collection->getBasicUserInfo($numberMoMo);
 
 ### Remittance : Coming Soon
 
-### NB : J'ai décidé de laisser l'implémentation de l'API de disbursement et de remittance pour l'environnement sandbox afin de permettre à d'autres développeurs de contribuer. Cela ouvre la voie à une collaboration plus large et à l'apport de nouvelles perspectives pour compléter cette partie du projet.
+**NB : J'ai décidé de laisser l'implémentation de l'API de disbursement et de remittance pour l'environnement sandbox afin de permettre à d'autres développeurs de contribuer. Cela ouvre la voie à une collaboration plus large et à l'apport de nouvelles perspectives pour compléter cette partie du projet.**
 
-### Ceux qui souhaitent l'avoir en production, peuvent me contacter à [ana@roazagba.me](mailto:ana@roazagba.me)
+**Ceux qui souhaitent l'avoir en production, peuvent me contacter à [ana@roazagba.me](mailto:ana@roazagba.me)**
 
-### Merci de votre compréhension.
+**Merci de votre compréhension.**
