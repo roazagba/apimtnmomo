@@ -157,6 +157,8 @@ $user_info = $collection->getBasicUserInfo($numberMoMo);
 
 ---
 
+<br><br>
+
 **NB : J'ai décidé de laisser l'implémentation de l'API de disbursement et de remittance pour l'environnement sandbox afin de permettre à d'autres développeurs de contribuer. Cela ouvre la voie à une collaboration plus large et à l'apport de nouvelles perspectives pour compléter cette partie du projet.**
 
 [Guide de la contribution](CONTRIBUTING.md)
