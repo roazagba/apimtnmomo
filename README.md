@@ -48,7 +48,7 @@ composer require roazagba/apimtnmomo
 ### Configuration
 
 ```bash
-php artisan vendor:publish --provider="Roazagba\ApiMTNMomo\MTNMoMoServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Roazagba\ApiMTNMomo\Providers\MTNMoMoServiceProvider" --tag="config"
 ```
 
 ### Créer un environnement sandbox utilisateur API ainsi que la clé secrète API.

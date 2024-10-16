@@ -58,7 +58,7 @@ Pour suggérer une nouvelle fonctionnalité, veuillez :
 
 ## Configuration de l'Environnement de Développement
 
-Sera très bientôt très bientôt
+Sera très bientôt disponible
 
 ## Processus de Soumission
 
