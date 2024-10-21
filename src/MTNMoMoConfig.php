@@ -23,10 +23,10 @@ final class MTNMoMoConfig
             'currency' => config('mtnmomo.currency'),
             'target' => config('mtnmomo.target'),
 
-            'callbackUrl' => config('mtnmomo.callbackUrl'),
-            'collectionApiKeySecret' => config('mtnmomo.collectionApiKeySecret'),
-            'collectionPrimaryKey' => config('mtnmomo.collectionPrimaryKey'),
-            'collectionUserId' => config('mtnmomo.collectionUserId')
+            'callbackUrl' => config('mtnmomo.callback_url'),
+            'collectionApiKeySecret' => config('mtnmomo.collection.api_key_secret'),
+            'collectionPrimaryKey' => config('mtnmomo.collection.primary_key'),
+            'collectionUserId' => config('mtnmomo.collection.user_id')
         ];
 
         $helpers = new Helpers;
