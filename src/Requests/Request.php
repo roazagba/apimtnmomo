@@ -4,7 +4,7 @@ namespace Roazagba\ApiMTNMomo\Requests;
 
 final class Request
 {
-    public static function requestGet(string $endpoint, array $headers)
+    public static function requestGet(string $endpoint, array $headers) : array
     {
         $ch = curl_init();
 
@@ -21,7 +21,7 @@ final class Request
         return [$http_status, $response];
     }
 
-    public static function requestPost(string $endpoint, array $headers, ?array $body)
+    public static function requestPost(string $endpoint, array $headers, ?array $body) : array
     {
         $ch = curl_init();
 

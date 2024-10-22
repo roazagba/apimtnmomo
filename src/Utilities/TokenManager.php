@@ -30,10 +30,10 @@ class TokenManager
 
     private function fetchNewToken($config, $product): array
     {
-        $url = $config->getValue($product, 'host') . $product . static::TOKEN_URI;
-        $primaryKey = $config->getValue($product, 'PrimaryKey');
-        $apiKeySecret = $config->getValue($product, 'ApiKeySecret');
-        $userID = $config->getValue($product, 'userId');
+        $url = $config->retrieveValue($product, 'host') . $product . static::TOKEN_URI;
+        $primaryKey = $config->retrieveValue($product, 'PrimaryKey');
+        $apiKeySecret = $config->retrieveValue($product, 'ApiKeySecret');
+        $userID = $config->retrieveValue($product, 'userId');
 
         $headers = [
             "Authorization: Basic " . base64_encode($userID . ':' . $apiKeySecret),

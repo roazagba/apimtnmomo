@@ -19,22 +19,24 @@ final class Helpers
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
 
-    public function massAssignAttributes($data = [])
+    public function assignAttributes(array $data = [])
     {
-        if (! is_array($data)) {
+        if (empty($data)) {
             return $this;
         }
 
-        foreach ($data as $key => $value) {
-            if (method_exists($this, 'set' . ucfirst($key))) {
-                $this->{'set' . $key}($value);
+        foreach ($data as $property => $value) {
+            $setter = 'set' . ucfirst($property);
+            if (is_callable([$this, $setter])) {
+                call_user_func([$this, $setter], $value);
             } else {
-                $this->$key = $value;
+                $this->$property = $value;
             }
         }
 
         return $this;
     }
+
 
     public static function convertObjectArray($objet): array
     {

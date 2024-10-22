@@ -39,10 +39,10 @@ class MTNMoMo
 
     /* public function getToken() : string
     {
-        $url = $this->config->getValue($this->product, 'host') . $this->product . static::TOKEN_URI;
-        $primaryKey = $this->config->getValue($this->product, 'PrimaryKey');
-        $apiKeySecret = $this->config->getValue($this->product, 'ApiKeySecret');
-        $userID = $this->config->getValue($this->product, 'userId');
+        $url = $this->config->retrieveValue($this->product, 'host') . $this->product . static::TOKEN_URI;
+        $primaryKey = $this->config->retrieveValue($this->product, 'PrimaryKey');
+        $apiKeySecret = $this->config->retrieveValue($this->product, 'ApiKeySecret');
+        $userID = $this->config->retrieveValue($this->product, 'userId');
 
         $headers = [
             "Authorization: Basic " . base64_encode($userID . ':' . $apiKeySecret),

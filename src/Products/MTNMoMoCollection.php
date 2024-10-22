@@ -17,7 +17,7 @@ class MTNMoMoCollection extends MTNMoMo
 
     private function getUrl(): string
     {
-        return $this->config->getValue($this->product, 'host') . $this->product;
+        return $this->config->retrieveValue($this->product, 'host') . $this->product;
     }
 
     private function getToken(): string
@@ -27,7 +27,7 @@ class MTNMoMoCollection extends MTNMoMo
         return $token->getToken($this->config, $this->product);
     }
 
-    public function createTransaction(array $params): string
+    public function createTransaction(array $params, array $custom_params = []): array
     {
         $required_keys = ['amount', 'referenceExternalID', 'numberMoMo', 'description', 'note'];
 
@@ -39,12 +39,12 @@ class MTNMoMoCollection extends MTNMoMo
 
 
 
-        $currency = $this->config->getValue($this->product, 'currency');
+        $currency = $this->config->retrieveValue($this->product, 'currency');
         $access_token = $this->getToken();
         $xReferenceId = Helpers::uuid4();
-        $primary_key = $this->config->getValue($this->product, 'primaryKey');
-        $callback = $this->config->getValue($this->product, 'callbackUrl');
-        $target = $this->config->getValue($this->product, 'target');
+        $primary_key = $this->config->retrieveValue($this->product, 'primaryKey');
+        $callback = $this->config->retrieveValue($this->product, 'callbackUrl');
+        $target = $this->config->retrieveValue($this->product, 'target');
 
         $headers = [
             "Ocp-Apim-Subscription-Key: $primary_key",
@@ -73,7 +73,7 @@ class MTNMoMoCollection extends MTNMoMo
             $this->verifException($response);
         }
 
-        return $xReferenceId;
+        return ['transactionId' => $xReferenceId, 'customParams' => $custom_params];
     }
 
     public function getTransaction(string $xReferenceId): array
@@ -83,8 +83,8 @@ class MTNMoMoCollection extends MTNMoMo
         }
 
         $access_token = $this->getToken();
-        $primary_key = $this->config->getValue($this->product, 'primaryKey');
-        $target = $this->config->getValue($this->product, 'target');
+        $primary_key = $this->config->retrieveValue($this->product, 'primaryKey');
+        $target = $this->config->retrieveValue($this->product, 'target');
 
         $headers = [
             "Ocp-Apim-Subscription-Key: $primary_key",
@@ -105,8 +105,8 @@ class MTNMoMoCollection extends MTNMoMo
     public function getAccountBalance(?string $currency = null): array
     {
         $access_token = $this->getToken();
-        $primary_key = $this->config->getValue($this->product, 'primaryKey');
-        $target = $this->config->getValue($this->product, 'target');
+        $primary_key = $this->config->retrieveValue($this->product, 'primaryKey');
+        $target = $this->config->retrieveValue($this->product, 'target');
 
         $headers = [
             "Ocp-Apim-Subscription-Key: $primary_key",
@@ -129,8 +129,8 @@ class MTNMoMoCollection extends MTNMoMo
     public function getBasicUserInfo(string $numberMoMo): array
     {
         $access_token = $this->getToken();
-        $primary_key = $this->config->getValue($this->product, 'primaryKey');
-        $target = $this->config->getValue($this->product, 'target');
+        $primary_key = $this->config->retrieveValue($this->product, 'primaryKey');
+        $target = $this->config->retrieveValue($this->product, 'target');
 
         $headers = [
             "Ocp-Apim-Subscription-Key: $primary_key",

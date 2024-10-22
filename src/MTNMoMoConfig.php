@@ -12,7 +12,6 @@ final class MTNMoMoConfig
     public $targetEnvironment;
 
     public $product;
-    private const PRODUCTS = ['collection', 'disbursement', 'remittance'];
 
     public $config;
 
@@ -30,46 +29,18 @@ final class MTNMoMoConfig
         ];
 
         $helpers = new Helpers;
-        $this->config = get_object_vars($helpers->massAssignAttributes($array));
+        $this->config = get_object_vars($helpers->assignAttributes($array));
     }
 
-    public function checkCredentials($prod)
-    {
-        $cfg = $this->config;
-        $keys_cfg = array_keys($cfg);
-        if (!in_array($prod, self::PRODUCTS)) {
-            throw new Exception('Invalid product. Product must be ' . implode(' or ', self::PRODUCTS));
-        }
-
-        $missRequi = [];
-        $requirements = ['host', 'currency', 'target', 'callbackUrl', $prod . 'PrimaryKey', $prod . 'ApiKeySecret', $prod . 'UserId'];
-
-        foreach ($requirements as $requirement) {
-            if (!in_array($requirement, $keys_cfg)) {
-                $missRequi[] = $requirement;
-            }
-        }
-
-        if (count($missRequi) != 0) {
-            throw new Exception("The following credentials are missing: " . implode(', ', $missRequi));
-        }
-
-        return $this;
-    }
-
-    public function getValue(?string $product = "", $configKey = ""): string
+    public function retrieveValue(?string $product = "", $configKey = ""): string
     {
         $filtered_nocoll = array_filter(array_keys($this->config), function ($item) use ($product) {
             return strpos($item, $product) !== 0;
         });
 
-        if (in_array($configKey, $filtered_nocoll)) {
-            $key = $configKey;
-        } else {
-            $key = strtolower($product) . ucfirst($configKey);
-        }
+        $key = in_array($configKey, $filtered_nocoll) ? $configKey : strtolower($product) . ucfirst($configKey);
 
-        if (!in_array($key, array_keys($this->config))) {
+        if (!array_key_exists($key, $this->config)) {
             throw new Exception("$key does not exist in config credetentials");
         }
 
