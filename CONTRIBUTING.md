@@ -7,7 +7,6 @@ Merci de vouloir contribuer à ce package Laravel ! Ce guide vous expliquera com
 - [Comment Contribuer](#comment-contribuer)
 - [Signalement de Bugs](#signalement-de-bugs)
 - [Propositions de Fonctionnalités](#propositions-de-fonctionnalités)
-- [Configuration de l'Environnement de Développement](#configuration-de-lenvironnement-de-développement)
 - [Processus de Soumission](#processus-de-soumission)
 - [Normes de Code](#normes-de-code)
 - [Tests](#tests)
@@ -55,10 +54,6 @@ Pour suggérer une nouvelle fonctionnalité, veuillez :
 2. Expliquer clairement la fonctionnalité proposée.
 3. Décrire pourquoi cette fonctionnalité est importante et utile.
 4. Donner des exemples d’utilisation ou des scénarios d’application.
-
-## Configuration de l'Environnement de Développement
-
-Sera très bientôt disponible
 
 ## Processus de Soumission
 
