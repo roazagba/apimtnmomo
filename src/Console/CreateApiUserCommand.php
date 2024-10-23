@@ -8,14 +8,38 @@ use Roazagba\ApiMTNMomo\Utilities\Helpers;
 
 class CreateApiUserCommand extends Command
 {
+    /**
+     * The name and signature of the console command.
+     * This defines the command's name and its required arguments: baseurl, primarykey, and callbackurl.
+     *
+     * @var string
+     */
     protected $signature = 'momo:create-api-user {baseurl} {primarykey} {callbackurl}';
-    protected $description = 'Crée un utilisateur API Momo dans l\'environnement sandbox';
 
+    /**
+     * The console command description.
+     * A short description of what the command does.
+     *
+     * @var string
+     */
+    protected $description = 'Creates a Momo API user in the sandbox environment';
+
+
+    /**
+     * Constructor to initialize the command.
+     */
     public function __construct()
     {
         parent::__construct();
     }
 
+
+    /**
+     * Execute the console command.
+     * This method handles the logic to create the API user based on user inputs.
+     *
+     * @return void
+     */
     public function handle()
     {
         $base_url = $this->argument('baseurl');

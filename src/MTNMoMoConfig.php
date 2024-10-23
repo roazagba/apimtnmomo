@@ -7,14 +7,48 @@ use Exception;
 
 final class MTNMoMoConfig
 {
+    /**
+     * The base URL for the MTN MoMo API.
+     *
+     * @var string
+     */
     public $baseURL;
+
+    /**
+     * The currency for transactions.
+     *
+     * @var string
+     */
     public $currency;
+
+    /**
+     * The target environment (e.g., sandbox or mtnbenin or ...).
+     *
+     * @var string
+     */
     public $targetEnvironment;
 
+    /**
+     * The product type.
+     *
+     * @var string
+     */
     public $product;
 
+    /**
+     * The configuration array holding API keys and other credentials.
+     *
+     * @var array
+     */
     public $config;
 
+
+    /**
+     * MTNMoMoConfig constructor.
+     *
+     * This constructor initializes the configuration object with values retrieved from the environment or configuration files.
+     * It uses a helper class to assign the attributes and store them in the config property.
+     */
     public function __construct()
     {
         $array = [
@@ -32,6 +66,18 @@ final class MTNMoMoConfig
         $this->config = get_object_vars($helpers->assignAttributes($array));
     }
 
+
+    /**
+     * Retrieves a specific value from the configuration based on the product and config key.
+     *
+     * This method filters the configuration based on the product and retrieves the corresponding
+     * key-value pair from the config array. If the key does not exist, it throws an exception.
+     *
+     * @param string|null $product The product name, used to retrieve product-specific configuration values.
+     * @param string $configKey The configuration key to retrieve (e.g., 'PrimaryKey', 'ApiKeySecret').
+     * @return string The value of the configuration key.
+     * @throws Exception If the specified key does not exist in the configuration.
+     */
     public function retrieveValue(?string $product = "", $configKey = ""): string
     {
         $filtered_nocoll = array_filter(array_keys($this->config), function ($item) use ($product) {

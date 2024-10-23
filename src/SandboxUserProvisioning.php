@@ -2,22 +2,48 @@
 
 namespace Roazagba\ApiMTNMomo;
 
-use Roazagba\ApiMTNMomo\Utilities\Helpers;
 use Roazagba\ApiMTNMomo\Requests\Request;
 use Exception;
-use Roazagba\ApiMTNMomo\Products\MTNMoMoCollection;
-use Roazagba\ApiMTNMomo\MTNMoMoConfig;
 
 final class SandboxUserProvisioning
 {
+    /**
+     * Configuration array containing user details, API keys, and base URL.
+     *
+     * @var array
+     */
     public $config;
+
+
+    /**
+     * The URI for creating a new user in the sandbox environment.
+     */
     private const CREATE_USER_URI = '/v1_0/apiuser';
 
+
+    /**
+     * SandboxUserProvisioning constructor.
+     *
+     * Initializes the class with the provided configuration array.
+     *
+     * @param array $config The configuration array containing user credentials, base URL, and other required details.
+     */
     public function __construct(array $config)
     {
         $this->config = $config;
     }
 
+
+    /**
+     * Creates a new user in the MTN MoMo Sandbox and generates an API key.
+     *
+     * This method sends a POST request to the sandbox environment to create a new user
+     * using the provided configuration details. If successful, it generates an API key and
+     * retrieves user information.
+     *
+     * @return array Returns an array containing user ID, primary key, API key, target environment, and callback host.
+     * @throws Exception If the response indicates an error (e.g., 400, 401, 409).
+     */
     public function create(): array
     {
         //$userID = Helpers::uuid4();

@@ -4,21 +4,33 @@ namespace Roazagba\ApiMTNMomo\Utilities;
 
 final class Helpers
 {
+    /**
+     * Generates a random UUID version 4.
+     *
+     * A version 4 UUID is a universally unique identifier generated from random data.
+     *
+     * @return string The version 4 UUID as a string.
+     */
     public static function uuid4(): string
     {
-        // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
         $data = $data ?? random_bytes(16);
         assert(strlen($data) == 16);
 
-        // Set version to 0100
         $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
-        // Set bits 6-7 to 10
         $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
 
-        // Output the 36 character UUID.
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
 
+    /**
+     * Assigns values to object attributes.
+     *
+     * This method dynamically assigns the values from the provided array
+     * to the corresponding object properties using setters if they exist.
+     *
+     * @param array $data Associative array where keys are property names and values are the values to assign.
+     * @return self Returns the current instance of the object for method chaining.
+     */
     public function assignAttributes(array $data = [])
     {
         if (empty($data)) {
@@ -38,6 +50,14 @@ final class Helpers
     }
 
 
+    /**
+     * Converts an object to an associative array.
+     *
+     * This method converts an object into an associative array using JSON conversion.
+     *
+     * @param object $object The object to convert.
+     * @return array The associative array representation of the object.
+     */
     public static function convertObjectArray($objet): array
     {
         return json_decode(json_encode($objet), true);

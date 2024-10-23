@@ -9,17 +9,33 @@ use Roazagba\ApiMTNMomo\Utilities\{Helpers, TokenManager};
 
 class MTNMoMoCollection extends MTNMoMo
 {
+    /**
+     * The product name for this collection service.
+     *
+     * @var string
+     */
     public $product = 'collection';
 
     private const REQUEST_TO_PAY_URI = '/v1_0/requesttopay';
     private const ACCOUNT_BALANCE_URI = '/v1_0/account/balance';
     private const GET_BASIC_USER_INFO_URI = '/v1_0/accountholder';
 
+
+    /**
+     * Retrieve the base URL for the collection API.
+     *
+     * @return string
+     */
     private function getUrl(): string
     {
         return $this->config->retrieveValue($this->product, 'host') . $this->product;
     }
 
+    /**
+     * Retrieve the access token required for API requests.
+     *
+     * @return string
+     */
     private function getToken(): string
     {
         $token = new TokenManager;
@@ -27,6 +43,15 @@ class MTNMoMoCollection extends MTNMoMo
         return $token->getToken($this->config, $this->product);
     }
 
+
+    /**
+     * Creates a new transaction to request payment.
+     *
+     * @param array $params Array containing 'amount', 'referenceExternalID', 'numberMoMo', 'description', and 'note'.
+     * @param array $custom_params Additional custom parameters for the transaction (optional).
+     * @return array Returns an array with 'transactionId' and any custom parameters.
+     * @throws Exception If required keys are missing or the response indicates an error.
+     */
     public function createTransaction(array $params, array $custom_params = []): array
     {
         $required_keys = ['amount', 'referenceExternalID', 'numberMoMo', 'description', 'note'];
@@ -36,8 +61,6 @@ class MTNMoMoCollection extends MTNMoMo
         if (!empty($missing_keys)) {
             throw new Exception("The missing keys are : " . implode(', ', $missing_keys));
         }
-
-
 
         $currency = $this->config->retrieveValue($this->product, 'currency');
         $access_token = $this->getToken();
@@ -76,6 +99,14 @@ class MTNMoMoCollection extends MTNMoMo
         return ['transactionId' => $xReferenceId, 'customParams' => $custom_params];
     }
 
+
+    /**
+     * Retrieve the status of a transaction by its reference ID.
+     *
+     * @param string $xReferenceId The reference ID of the transaction.
+     * @return array Returns an array with the transaction details.
+     * @throws Exception If the transaction reference ID is invalid or the request fails.
+     */
     public function getTransaction(string $xReferenceId): array
     {
         if (!isset($xReferenceId) && empty($xReferenceId)) {
@@ -102,6 +133,14 @@ class MTNMoMoCollection extends MTNMoMo
         return $response[1];
     }
 
+
+    /**
+     * Retrieve the account balance for the collection service.
+     *
+     * @param string|null $currency Optional currency parameter for specific balances.
+     * @return array Returns an array with the account balance details.
+     * @throws Exception If the request fails.
+     */
     public function getAccountBalance(?string $currency = null): array
     {
         $access_token = $this->getToken();
@@ -126,6 +165,14 @@ class MTNMoMoCollection extends MTNMoMo
         return $response[1];
     }
 
+
+    /**
+     * Retrieve basic user information by the user's MoMo number.
+     *
+     * @param string $numberMoMo The MoMo number of the user.
+     * @return array Returns an array with the basic user information.
+     * @throws Exception If the request fails.
+     */
     public function getBasicUserInfo(string $numberMoMo): array
     {
         $access_token = $this->getToken();

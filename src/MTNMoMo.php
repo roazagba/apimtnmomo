@@ -3,20 +3,48 @@
 namespace Roazagba\ApiMTNMomo;
 
 use Roazagba\ApiMTNMomo\MTNMoMoConfig;
-use Roazagba\ApiMTNMomo\Requests\Request;
-use Roazagba\ApiMTNMomo\Utilities\Helpers;
 use Exception;
 
 class MTNMoMo
 {
+    /**
+     * The configuration object for MTN MoMo API.
+     *
+     * @var MTNMoMoConfig
+     */
     protected $config;
+
+    /**
+     * The product name for MTN MoMo API.
+     *
+     * @var string|null
+     */
     protected $product = null;
 
+
+    /**
+     * MTNMoMo constructor.
+     *
+     * Initializes the MTN MoMo class with a configuration object.
+     *
+     * @param MTNMoMoConfig $config The configuration object containing API credentials and settings.
+     */
     public function __construct(MTNMoMoConfig $config)
     {
         $this->config = $config;
     }
 
+
+    /**
+     * Verifies the response for exceptions based on the HTTP status code.
+     *
+     * This method checks the HTTP status code in the response and throws an exception
+     * if it indicates an error such as bad request, unauthorized access, conflict, or internal server error.
+     *
+     * @param array $response The response array containing the HTTP status code and response body.
+     * @throws Exception If the response indicates an error (e.g., 400, 401, 409, 500).
+     * @return void
+     */
     public function verifException($response)
     {
         switch ($response[0]) {
@@ -37,7 +65,16 @@ class MTNMoMo
         }
     }
 
-    /* public function getToken() : string
+    /*
+     * Retrieves an access token from the MTN MoMo API (commented out).
+     *
+     * This method is responsible for retrieving an access token using the credentials from the configuration.
+     * It makes a POST request to the token endpoint and handles possible errors based on the response status.
+     * 
+     * @return string The access token.
+     * @throws Exception If the response indicates an error (e.g., 401, 500).
+     *
+     public function getToken() : string
     {
         $url = $this->config->retrieveValue($this->product, 'host') . $this->product . static::TOKEN_URI;
         $primaryKey = $this->config->retrieveValue($this->product, 'PrimaryKey');
