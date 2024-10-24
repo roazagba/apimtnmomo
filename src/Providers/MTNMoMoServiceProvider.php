@@ -12,7 +12,7 @@ class MTNMoMoServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->publishes([
             __DIR__ . '/../../config/mtnmomo.php' => config_path('mtnmomo.php'),
@@ -30,7 +30,7 @@ class MTNMoMoServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->mergeConfigFrom(
             __DIR__ . '/../../config/mtnmomo.php',

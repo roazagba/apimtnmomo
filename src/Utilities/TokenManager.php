@@ -113,7 +113,7 @@ class TokenManager
      * @param array $token_data The token data to save.
      * @return void
      */
-    private function saveToken($token_data)
+    private function saveToken($token_data): void
     {
         file_put_contents($this->token_file, json_encode($token_data));
     }
@@ -126,7 +126,7 @@ class TokenManager
      *
      * @return array|null The token data array, or null if the file does not exist.
      */
-    private function loadToken()
+    private function loadToken(): array | null
     {
         if (file_exists($this->token_file)) {
             $token_data = json_decode(file_get_contents($this->token_file), true);

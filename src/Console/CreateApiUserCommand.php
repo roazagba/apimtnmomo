@@ -40,7 +40,7 @@ class CreateApiUserCommand extends Command
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $base_url = $this->argument('baseurl');
         $primary_key = $this->argument('primarykey');

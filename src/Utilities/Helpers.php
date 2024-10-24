@@ -31,7 +31,7 @@ final class Helpers
      * @param array $data Associative array where keys are property names and values are the values to assign.
      * @return self Returns the current instance of the object for method chaining.
      */
-    public function assignAttributes(array $data = [])
+    public function assignAttributes(array $data = []): self
     {
         if (empty($data)) {
             return $this;
